@@ -1,0 +1,6 @@
+{
+    "buildCommand": "python build.py",
+    "rewrites": [
+        { "source": "/", "destination": "/build/index.html" }
+    ]
+}
