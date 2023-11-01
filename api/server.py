@@ -5,27 +5,33 @@ import os
 
 app = FastAPI()
 
-print(os.listdir("slides"))
-
+slides_path = "./slides"
+slides = os.listdir(slides_path)
 html = f"""
 <!DOCTYPE html>
 <html>
     <body>
     {
-        "".join([f"<a href='/slides/{s}'>{s}</a>" for s in os.listdir("slides")])
+        "".join([f"<a href='/slides__{s}'>{s}</a>" for s in slides])
     }
     </body>
 </html>
 """
 
+for s in slides:
+    app.mount(
+        f"/slides__{s}",
+        StaticFiles(directory=f"{slides_path}/{s}", html=True),
+        name=s,
+    )
+
+
 @app.get("/")
-async def get():
+async def root():
     return HTMLResponse(html)
 
-for s in os.listdir("slides"):
-    app.mount(f"/slides/{s}", StaticFiles(directory=f"slides/{s}", html=True), name="demo")
 
-
-if __name__=="__main__":
+if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(app, port=8000)

@@ -6,7 +6,7 @@ slides = os.listdir("./slides")
 
 
 os.makedirs("./build", exist_ok=True)
-shutil.copy("./slides", "./build/slides")
+shutil.copytree("./slides", "./build/slides")
 html = f"""
 <!DOCTYPE html>
 <html>

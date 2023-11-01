@@ -1,7 +1,5 @@
 {
-    "buildCommand": "python3 build.py",
-    "outputDirectory": "build",
     "rewrites": [
-        { "source": "/", "destination": "/build/index.html" }
+        { "source": "/(.*)", "destination": "/api/server" }
     ]
 }
